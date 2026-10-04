@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>مقارنة احترافية | Redmi Note 15 vs Redmi 17 vs Infinix Hot 60 Pro+ vs Samsung A17</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0b0e14;
+    --card: #141922;
+    --card2: #1a2130;
+    --border: #252d3d;
+    --gold: #f0b90b;
+    --green: #0ecb81;
+    --red: #f6465d;
+    --blue: #3b82f6;
+    --text: #eaecef;
+    --muted: #848e9c;
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, Tahoma, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 16px 10px 60px;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* === HEADER === */
+  .hero {
+    text-align: center;
+    padding: 28px 16px;
+    background: linear-gradient(160deg, #141922 0%, #0b0e14 100%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(240,185,11,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #f0b90b, #f8d33a, #f0b90b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+    position: relative;
+  }
+  .hero p { color: var(--muted); font-size: 13px; position: relative; }
+
+  /* === SECTION TITLE === */
+  .sec-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 0 14px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .sec-title::before {
+    content: '';
+    width: 4px; height: 22px;
+    background: var(--gold);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  /* === PHONE CARDS === */
+  .phone-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .phone-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 16px;
+    transition: border-color 0.2s;
+  }
+  .phone-card:hover { border-color: #3a4560; }
+  .phone-card .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .badge-gold { background: rgba(240,185,11,0.15); color: var(--gold); border: 1px solid rgba(240,185,11,0.3); }
+  .badge-green { background: rgba(14,203,129,0.12); color: var(--green); border: 1px solid rgba(14,203,129,0.25); }
+  .badge-blue { background: rgba(59,130,246,0.12); color: var(--blue); border: 1px solid rgba(59,130,246,0.25); }
+  .badge-red { background: rgba(246,70,93,0.12); color: var(--red); border: 1px solid rgba(246,70,93,0.25); }
+
+  .phone-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .phone-card .price-tag {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .phone-card .specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .phone-card .specs span { display: flex; gap: 6px; }
+  .phone-card .specs strong { color: var(--text); font-weight: 500; }
+
+  /* === COMPARISON TABLE === */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+    font-size: 12.5px;
+  }
+  th, td {
+    padding: 11px 10px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  thead th {
+    background: var(--card2);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--gold);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  thead th:first-child { text-align: right; border-radius: 0 14px 0 0; }
+  thead th:last-child { border-radius: 14px 0 0 0; }
+  tbody td:first-child { text-align: right; font-weight: 600; color: #b7bdc6; background: var(--card); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:nth-child(even) td { background: #11161f; }
+
+  .rank-1 { background: rgba(14,203,129,0.08) !important; color: var(--green); font-weight: 700; }
+  .rank-2 { background: rgba(59,130,246,0.06) !important; color: #93c5fd; font-weight: 600; }
+  .rank-3 { background: rgba(240,185,11,0.05) !important; color: #fcd34d; font-weight: 600; }
+  .rank-4 { background: rgba(246,70,93,0.05) !important; color: #fca5a5; font-weight: 600; }
+
+  .example-note {
+    display: block;
+    font-size: 10.5px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  /* === FINAL VERDICT === */
+  .verdict {
+    background: linear-gradient(135deg, #1a2130, #141922);
+    border: 1px solid rgba(240,185,11,0.25);
+    border-radius: 18px;
+    padding: 22px 18px;
+    margin-top: 30px;
+  }
+  .verdict h2 {
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .verdict-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .verdict-row:last-child { border-bottom: none; }
+  .verdict-rank {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px;
+    flex-shrink: 0;
+  }
+  .vr-1 { background: rgba(240,185,11,0.15); color: var(--gold); }
+  .vr-2 { background: rgba(192,192,192,0.12); color: #c0c0c0; }
+  .vr-3 { background: rgba(205,127,50,0.12); color: #cd7f32; }
+  .vr-4 { background: rgba(100,100,100,0.1); color: #777; }
+  .verdict-info { flex: 1; }
+  .verdict-info h4 { font-size: 14.5px; margin-bottom: 2px; }
+  .verdict-info p { font-size: 12px; color: var(--muted); }
+  .verdict-score {
+    font-size: 18px; font-weight: 800;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .note-box {
+    background: rgba(240,185,11,0.06);
+    border: 1px solid rgba(240,185,11,0.15);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 12px;
+    color: #c9a227;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  @media (min-width: 700px) {
+    body { font-size: 15px; padding: 30px 20px 80px; }
+    .hero h1 { font-size: 28px; }
+    .phone-grid { grid-template-columns: 1fr 1fr; }
+    .phone-card .specs { font-size: 13.5px; }
+    table { font-size: 13.5px; }
+    th, td { padding: 13px 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== HERO ===== -->
+  <div class="hero">
+    <h1>⚡ المقارنة النهائية · 4 هواتف</h1>
+    <p>Redmi Note 15 · Redmi 17 · Infinix Hot 60 Pro+ · Samsung Galaxy A17</p>
+  </div>
+
+  <!-- ===== PHONE CARDS ===== -->
+  <div class="sec-title">📱 التعريف بكل جهاز</div>
+  <div class="phone-grid">
+
+    <div class="phone-card">
+      <span class="badge badge-gold">🥇 الأفضل إجمالاً</span>
+      <h3>Redmi Note 15 4G</h3>
+      <div class="price-tag">~15,000 EGP · 8GB + 256GB</div>
+      <div class="specs">
+        <span>🖥️ <strong>6.77" AMOLED</strong> FHD+ 120Hz</span>
+        <span>⚙️ <strong>Helio G100-Ultra</strong></span>
+        <span>📸 <strong>108MP + OIS</strong></span>
+        <span>🤳 <strong>20MP أمامية</strong></span>
+        <span>🔋 <strong>6000mAh</strong> + 33W</span>
+        <span>🛡️ IP64 · تحديثات 4 سنوات</span>
+      </div>
+    </div>
+
+    <div class="phone-card">
+      <span class="badge badge-green">🔋 بطارية وحشية</span>
+      <h3>Redmi 17 5G</h3>
+      <div class="price-tag">~15,500 EGP · 6GB + 256GB</div>
+      <div class="specs">
+        <span>🖥️ <strong>6.9" LCD</strong> 720p 120Hz</span>
+        <span>⚙️ <strong>Snapdragon 4 Gen 5</strong></span>
+        <span>📸 <strong>50MP</strong> (بدون OIS)</span>
+        <span>🤳 <strong>8MP أمامية</strong></span>
+        <span>🔋 <strong>7500mAh</strong> + 45W</span>
+        <span>📶 <strong>5G</strong> · IP64</span>
+      </div>
+    </div>
+
+    <div class="phone-card">
+      <span class="badge badge-blue">🖥️ أفضل شاشة</span>
+      <h3>Infinix Hot 60 Pro Plus</h3>
+      <div class="price-tag">~14,500 EGP · 8GB + 256GB</div>
+      <div class="specs">
+        <span>🖥️ <strong>6.78" AMOLED 1.5K</strong> 144Hz</span>
+        <span>⚙️ <strong>Helio G200</strong></span>
+        <span>📸 <strong>50MP</strong> (بدون OIS)</span>
+        <span>🤳 <strong>13MP أمامية</strong></span>
+        <span>🔋 <strong>5160mAh</strong> + 45W</span>
+        <span>🛡️ IP65 · تحديثات 3 سنوات</span>
+      </div>
+    </div>
+
+    <div class="phone-card">
+      <span class="badge badge-red">🔄 أكثر تحديثات</span>
+      <h3>Samsung Galaxy A17 4G</h3>
+      <div class="price-tag">~13,000 EGP · 6GB + 128GB</div>
+      <div class="specs">
+        <span>🖥️ <strong>6.7" Super AMOLED</strong> FHD+ 90Hz</span>
+        <span>⚙️ <strong>Helio G99</strong></span>
+        <span>📸 <strong>50MP + OIS</strong></span>
+        <span>🤳 <strong>13MP أمامية</strong></span>
+        <span>🔋 <strong>5000mAh</strong> + 25W</span>
+        <span>🛡️ IP54 · تحديثات 6 سنوات</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== BATTERY ===== -->
+  <div class="sec-title">🔋 البطارية والشحن</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>المعيار</th>
+          <th>Redmi 17 5G</th>
+          <th>Redmi Note 15</th>
+          <th>Infinix Hot 60 Pro+</th>
+          <th>Samsung A17</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>السعة</td>
+          <td class="rank-1">7500 mAh<span class="example-note">تشغيل فيديو 28 ساعة متواصلة</span></td>
+          <td class="rank-2">6000 mAh<span class="example-note">يوم كامل استخدام مكثف</span></td>
+          <td class="rank-3">5160 mAh<span class="example-note">يوم مزدحم</span></td>
+          <td class="rank-4">5000 mAh<span class="example-note">تحتاج شحن مسائي</span></td>
+        </tr>
+        <tr>
+          <td>سرعة الشحن</td>
+          <td class="rank-2">45W<span class="example-note">50% في ~35 دقيقة</span></td>
+          <td class="rank-3">33W<span class="example-note">شحن جيد</span></td>
+          <td class="rank-1">45W<span class="example-note">50% في 22 دقيقة</span></td>
+          <td class="rank-4">25W<span class="example-note">50% في 30 دقيقة</span></td>
+        </tr>
+        <tr>
+          <td>التقييم</td>
+          <td class="rank-1">🥇 بطارية لا تُقهر</td>
+          <td class="rank-2">🥈 متوازن ممتاز</td>
+          <td class="rank-3">🥉 شحن سريع لكن سعة أقل</td>
+          <td class="rank-4">❌ الأضعف</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== DISPLAY ===== -->
+  <div class="sec-title">🖥️ الشاشة</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>المعيار</th>
+          <th>Infinix Hot 60 Pro+</th>
+          <th>Redmi Note 15</th>
+          <th>Samsung A17</th>
+          <th>Redmi 17 5G</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>النوع</td>
+          <td class="rank-1">AMOLED 1.5K<span class="example-note">أعلى دقة (440 ppi)</span></td>
+          <td class="rank-2">AMOLED FHD+<span class="example-note">دقة عالية (388 ppi)</span></td>
+          <td class="rank-3">Super AMOLED FHD+<span class="example-note">دقة جيدة</span></td>
+          <td class="rank-4">LCD 720p<span class="example-note">ترى البكسلات</span></td>
+        </tr>
+        <tr>
+          <td>معدل التحديث</td>
+          <td class="rank-1">144Hz<span class="example-note">أعلى سلاسة</span></td>
+          <td class="rank-2">120Hz</td>
+          <td class="rank-4">90Hz</td>
+          <td class="rank-2">120Hz</td>
+        </tr>
+        <tr>
+          <td>السطوع الأقصى</td>
+          <td class="rank-2">4500 nits<span class="example-note">رؤية واضحة جداً بالشمس</span></td>
+          <td class="rank-1">3200 nits<span class="example-note">ممتاز جداً</span></td>
+          <td class="rank-3">800 nits<span class="example-note">مقبول</span></td>
+          <td class="rank-4">825 nits<span class="example-note">الأقل</span></td>
+        </tr>
+        <tr>
+          <td>التقييم</td>
+          <td class="rank-1">🥇 الأفضل للمشاهدة</td>
+          <td class="rank-2">🥈 الأدق لوناً</td>
+          <td class="rank-3">🥉 جيدة</td>
+          <td class="rank-4">❌ الأضعف</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== PERFORMANCE ===== -->
+  <div class="sec-title">⚙️ الأداء (المعالج + الرام)</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>المعيار</th>
+          <th>Redmi Note 15</th>
+          <th>Infinix Hot 60 Pro+</th>
+          <th>Redmi 17 5G</th>
+          <th>Samsung A17</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>المعالج</td>
+          <td class="rank-1">Helio G100-Ultra<span class="example-note">6nm · أسرع معالج هنا</span></td>
+          <td class="rank-2">Helio G200<span class="example-note">6nm · أداء قريب جداً</span></td>
+          <td class="rank-3">Snapdragon 4 Gen 5<span class="example-note">مناسب للمهام اليومية</span></td>
+          <td class="rank-4">Helio G99<span class="example-note">الأقدم والأضعف</span></td>
+        </tr>
+        <tr>
+          <td>الرام</td>
+          <td class="rank-1">8GB<span class="example-note">تعدد مهام مريح</span></td>
+          <td class="rank-1">8GB + 8GB توسعة<span class="example-note">الأكبر نظرياً</span></td>
+          <td class="rank-3">6GB<span class="example-note">مقبول</span></td>
+          <td class="rank-4">6GB<span class="example-note">الأقل</span></td>
+        </tr>
+        <tr>
+          <td>مثال PUBG</td>
+          <td class="rank-1">HDR + Ultra، 60fps مستقر</td>
+          <td class="rank-2">HDR + Ultra، 60fps جيد</td>
+          <td class="rank-3">HD + Ultra، 40-50fps</td>
+          <td class="rank-4">HD، 30-40fps متذبذب</td>
+        </tr>
+        <tr>
+          <td>التقييم</td>
+          <td class="rank-1">🥇 الأقوى عملياً</td>
+          <td class="rank-2">🥈 قريب جداً</td>
+          <td class="rank-3">🥉 يفي بالغرض</td>
+          <td class="rank-4">❌ الأضعف</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== CAMERA ===== -->
+  <div class="sec-title">📸 الكاميرا</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>المعيار</th>
+          <th>Redmi Note 15</th>
+          <th>Samsung A17</th>
+          <th>Infinix Hot 60 Pro+</th>
+          <th>Redmi 17 5G</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>الخلفية</td>
+          <td class="rank-1">108MP + OIS<span class="example-note">تفاصيل خرافية، ثبات ممتاز</span></td>
+          <td class="rank-2">50MP + OIS<span class="example-note">ثبات ممتاز</span></td>
+          <td class="rank-3">50MP بدون OIS<span class="example-note">فيديو مهتز</span></td>
+          <td class="rank-4">50MP بدون OIS<span class="example-note">فيديو مهتز</span></td>
+        </tr>
+        <tr>
+          <td>الأمامية</td>
+          <td class="rank-1">20MP<span class="example-note">سيلفي واضح جداً</span></td>
+          <td class="rank-2">13MP<span class="example-note">سيلفي جيد</span></td>
+          <td class="rank-3">13MP<span class="example-note">سيلفي مقبول</span></td>
+          <td class="rank-4">8MP<span class="example-note">سيلفي ضعيف</span></td>
+        </tr>
+        <tr>
+          <td>مثال: تصوير بالليل</td>
+          <td class="rank-1">صورة واضحة بإضاءة كافية</td>
+          <td class="rank-2">جيدة بفضل OIS</td>
+          <td class="rank-3">مقبولة</td>
+          <td class="rank-4">ضجيج عالي</td>
+        </tr>
+        <tr>
+          <td>التقييم</td>
+          <td class="rank-1">🥇 الأفضل تصويراً</td>
+          <td class="rank-2">🥈 ثبات ممتاز</td>
+          <td class="rank-3">🥉 متوسط</td>
+          <td class="rank-4">❌ الأضعف</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== SOFTWARE & BUILD ===== -->
+  <div class="sec-title">🔄 التحديثات والمتانة</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>المعيار</th>
+          <th>Samsung A17</th>
+          <th>Redmi Note 15</th>
+          <th>Redmi 17 5G</th>
+          <th>Infinix Hot 60 Pro+</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>مدة التحديثات</td>
+          <td class="rank-1">6 سنوات<span class="example-note">حتى 2032</span></td>
+          <td class="rank-2">4 سنوات<span class="example-note">حتى 2030</span></td>
+          <td class="rank-2">4 سنوات<span class="example-note">حتى 2030</span></td>
+          <td class="rank-4">3 سنوات<span class="example-note">حتى 2029</span></td>
+        </tr>
+        <tr>
+          <td>نظام البداية</td>
+          <td class="rank-2">Android 15</td>
+          <td class="rank-2">Android 15</td>
+          <td class="rank-2">Android 16</td>
+          <td class="rank-2">Android 15</td>
+        </tr>
+        <tr>
+          <td>مقاومة الماء</td>
+          <td class="rank-4">IP54<span class="example-note">رذاذ فقط</span></td>
+          <td class="rank-2">IP64<span class="example-note">رذاذ وغبار</span></td>
+          <td class="rank-2">IP64</td>
+          <td class="rank-1">IP65<span class="example-note">رش ماء مباشر</span></td>
+        </tr>
+        <tr>
+          <td>التقييم</td>
+          <td class="rank-1">🥇 الأطول عمراً</td>
+          <td class="rank-2">🥈 متوازن</td>
+          <td class="rank-2">🥈 متوازن</td>
+          <td class="rank-4">❌ الأقصر</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== FULL SPECS ===== -->
+  <div class="sec-title">📋 المواصفات الكاملة</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>المواصفة</th>
+          <th>Redmi Note 15</th>
+          <th>Redmi 17 5G</th>
+          <th>Infinix Hot 60 Pro+</th>
+          <th>Samsung A17</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>الشاشة</td><td>6.77" AMOLED FHD+ 120Hz</td><td>6.9" LCD 720p 120Hz</td><td>6.78" AMOLED 1.5K 144Hz</td><td>6.7" AMOLED FHD+ 90Hz</td></tr>
+        <tr><td>المعالج</td><td>Helio G100-Ultra</td><td>Snapdragon 4 Gen 5</td><td>Helio G200</td><td>Helio G99</td></tr>
+        <tr><td>الرام/التخزين</td><td>8+256</td><td>6+256</td><td>8+256</td><td>6+128</td></tr>
+        <tr><td>البطارية</td><td>6000mAh</td><td>7500mAh</td><td>5160mAh</td><td>5000mAh</td></tr>
+        <tr><td>الشحن</td><td>33W</td><td>45W</td><td>45W</td><td>25W</td></tr>
+        <tr><td>الخلفية</td><td>108MP + OIS</td><td>50MP</td><td>50MP</td><td>50MP + OIS</td></tr>
+        <tr><td>الأمامية</td><td>20MP</td><td>8MP</td><td>13MP</td><td>13MP</td></tr>
+        <tr><td>الشبكة</td><td>4G</td><td>5G</td><td>4G</td><td>4G</td></tr>
+        <tr><td>التحديثات</td><td>4 سنوات</td><td>4 سنوات</td><td>3 سنوات</td><td>6 سنوات</td></tr>
+        <tr><td>المتانة</td><td>IP64</td><td>IP64</td><td>IP65</td><td>IP54</td></tr>
+        <tr><td>السعر (موبيزل)</td><td>~15,000 EGP</td><td>~15,500 EGP</td><td>~14,500 EGP</td><td>~13,000 EGP</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== FINAL VERDICT ===== -->
+  <div class="sec-title">🏆 الترتيب النهائي</div>
+  <div class="verdict">
+    <h2>من الفائز؟</h2>
+
+    <div class="verdict-row">
+      <div class="verdict-rank vr-1">🥇</div>
+      <div class="verdict-info">
+        <h4>Redmi Note 15 4G</h4>
+        <p>فاز في: الشاشة، الكاميرا، الأداء، التوازن العام · خسر في: الشبكة (4G فقط) · عيبه الوحيد أنك تتنازل عن 5G</p>
+      </div>
+      <div class="verdict-score">9.2</div>
+    </div>
+
+    <div class="verdict-row">
+      <div class="verdict-rank vr-2">🥈</div>
+      <div class="verdict-info">
+        <h4>Samsung Galaxy A17</h4>
+        <p>فاز في: التحديثات (6 سنوات)، OIS · خسر في: الأداء، البطارية، الرام، السعر مقابل المواصفات</p>
+      </div>
+      <div class="verdict-score">8.1</div>
+    </div>
+
+    <div class="verdict-row">
+      <div class="verdict-rank vr-3">🥉</div>
+      <div class="verdict-info">
+        <h4>Infinix Hot 60 Pro Plus</h4>
+        <p>فاز في: الشاشة (144Hz 1.5K)، الخفة (155g) · خسر في: التحديثات (3 سنوات)، بدون OIS، بطارية أصغر</p>
+      </div>
+      <div class="verdict-score">7.8</div>
+    </div>
+
+    <div class="verdict-row">
+      <div class="verdict-rank vr-4">4</div>
+      <div class="verdict-info">
+        <h4>Redmi 17 5G</h4>
+        <p>فاز في: البطارية (7500mAh)، 5G · خسر في: الشاشة (720p LCD)، الكاميرا الأمامية (8MP)، الوزن (232g)</p>
+      </div>
+      <div class="verdict-score">7.0</div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    📌 Redmi Note 15 4G هو الأنسب لمن يريد أفضل تجربة شاملة · Samsung A17 هو الخيار الآمن لو 5G والتحديثات أولوية قصوى
+  </div>
+
+</div>
+</body>
+</html>
