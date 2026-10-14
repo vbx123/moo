@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مناهل النجاة - التطبيق الديني الشامل</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        islamic: {
+                            dark: '#064e3b',
+                            DEFAULT: '#047857',
+                            light: '#10b981',
+                            gold: '#d97706',
+                            goldLight: '#fef3c7',
+                            bg: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
+</head>
+<body class="bg-islamic-bg text-slate-800 min-h-screen pb-12">
+
+    <!-- الديالوج الترحيبي (Modal) -->
+    <div id="welcomeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center shadow-2xl relative border-t-4 border-islamic-gold">
+            <button onclick="closeModal()" class="absolute top-4 left-4 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 w-9 h-9 rounded-full flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-16 h-16 bg-islamic-goldLight text-islamic-gold rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
+                <i class="fa-solid fa-kaaba"></i>
+            </div>
+            <h3 class="text-xl font-bold text-islamic-dark mb-2">أهلاً بك في مناهل النجاة</h3>
+            <div class="bg-islamic-bg p-4 rounded-2xl border border-emerald-100 my-4">
+                <p class="text-islamic-dark font-semibold text-lg leading-relaxed">
+                    "قُلْ إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ"
+                </p>
+            </div>
+            <div class="flex items-center justify-center gap-2 mt-4">
+                <input type="checkbox" id="dontShowAgain" class="w-4 h-4 text-islamic rounded border-slate-300 focus:ring-islamic">
+                <label for="dontShowAgain" class="text-sm text-slate-600 cursor-pointer">عدم الإظهار مرة أخرى</label>
+            </div>
+            <button onclick="closeModal()" class="w-full mt-6 bg-islamic hover:bg-islamic-dark text-white font-bold py-3 rounded-xl transition shadow-lg shadow-islamic/30">
+                دخول التطبيق
+            </button>
+        </div>
+    </div>
+
+    <!-- البار العلوي (Header) -->
+    <header class="bg-islamic-dark text-white sticky top-0 z-40 shadow-md">
+        <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-islamic-gold flex items-center justify-center shadow">
+                    <i class="fa-solid fa-mosque text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">مناهل النجاة</h1>
+                    <span id="locationName" class="text-xs text-emerald-300">جاري تحديد الموقع...</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="notifications.html" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition" title="الإشعارات">
+                    <i class="fa-solid fa-bell text-sm"></i>
+                </a>
+                <a href="settings.html" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition" title="الإعدادات">
+                    <i class="fa-solid fa-gear text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="max-w-md mx-auto px-4 mt-4 space-y-4">
+
+        <!-- صندوق الآية الكريمة -->
+        <div class="bg-gradient-to-r from-emerald-800 to-islamic-dark text-white p-4 rounded-2xl shadow-lg relative overflow-hidden flex items-center gap-4">
+            <div class="absolute -left-6 -bottom-6 text-white/5 text-7xl pointer-events-none">
+                <i class="fa-solid fa-quran"></i>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-islamic-gold/20 flex-shrink-0 flex items-center justify-center text-islamic-gold border border-islamic-gold/30">
+                <i class="fa-solid fa-book-quran text-xl"></i>
+            </div>
+            <div>
+                <span class="text-xs text-islamic-gold font-bold tracking-wider uppercase block mb-1">آية اليوم</span>
+                <p class="text-sm font-medium leading-relaxed">
+                    قُلْ إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ
+                </p>
+            </div>
+        </div>
+
+        <!-- مواقيت الصلاة (API دقيق + الشمس والقمر) -->
+        <div class="bg-white rounded-3xl p-5 shadow-xl border border-slate-100 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-islamic-gold via-islamic to-islamic-dark"></div>
+            
+            <!-- التاريخ الهجري والميلادي -->
+            <div class="flex justify-between items-center pb-4 border-b border-slate-100 text-sm">
+                <div id="hijriDate" class="flex items-center gap-2 text-islamic-dark font-bold">
+                    <i class="fa-solid fa-calendar-days text-islamic-gold"></i>
+                    <span>جاري التحميل...</span>
+                </div>
+                <div id="gregorianDate" class="text-slate-500 font-medium text-xs bg-slate-100 px-3 py-1 rounded-full">
+                    ...
+                </div>
+            </div>
+
+            <!-- مؤشر الوقت الاحترافي (الصلاة القادمة) -->
+            <div class="my-5 bg-gradient-to-br from-slate-900 to-emerald-950 text-white rounded-2xl p-4 shadow-inner relative overflow-hidden">
+                <div class="absolute right-3 top-3 text-islamic-gold animate-pulse">
+                    <i id="timeIcon" class="fa-solid fa-sun text-3xl"></i>
+                </div>
+                <div class="relative z-10">
+                    <span class="text-xs text-emerald-300 font-semibold block">الصلاة القادمة</span>
+                    <div class="flex justify-between items-end mt-1">
+                        <div>
+                            <h3 id="nextPrayerName" class="text-2xl font-black text-white tracking-wide">--</h3>
+                            <span id="nextPrayerCountdown" class="text-xs text-slate-300">جاري الحساب...</span>
+                        </div>
+                        <div class="text-left">
+                            <span id="nextPrayerTime" class="text-xl font-bold text-islamic-gold">--:--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- أوقات الصلوات المصغرة -->
+            <div class="grid grid-cols-5 gap-2 text-center" id="prayerTimesGrid">
+                <!-- يتم تعبئتها ديناميكياً عبر الجافاسكريبت -->
+                <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 col-span-5 text-xs text-slate-500">جاري تحديث الأوقات بدقة...</div>
+            </div>
+        </div>
+
+        <!-- صندوق بث إذاعة القرآن الكريم المصرية الاحترافي -->
+        <div class="bg-white rounded-2xl p-4 shadow-md border border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-tower-broadcast text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-slate-800">إذاعة القرآن الكريم</h4>
+                    <span id="radioStatusText" class="text-xs text-slate-500 flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-slate-400"></span> متوقف مؤقتاً
+                    </span>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="playRadioBtn" onclick="toggleRadio()" class="w-11 h-11 rounded-full bg-islamic hover:bg-islamic-dark text-white flex items-center justify-center transition shadow-md shadow-islamic/30">
+                    <i id="radioIcon" class="fa-solid fa-play text-sm"></i>
+                </button>
+            </div>
+            <!-- عنصر الصوت للراديو المصري (بث رسمي مستقر) -->
+            <audio id="quranRadio" src="https://stream.radiojar.com/8s5u5tpftwzuv" preload="none"></audio>
+        </div>
+
+        <!-- الأقسام المربعة الرئيسية الاحترافية (مرتبطة بصفحات المستودع) -->
+        <div class="grid grid-cols-3 gap-3">
+            
+            <!-- القرآن الكريم -->
+            <a href="quran.html" class="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 text-center flex flex-col items-center group">
+                <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-islamic flex items-center justify-center text-2xl mb-2 group-hover:bg-islamic group-hover:text-white transition duration-300 shadow-inner">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-700">القرآن الكريم</span>
+            </a>
+
+            <!-- قسم الراديو -->
+            <a href="radio.html" class="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 text-center flex flex-col items-center group">
+                <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl mb-2 group-hover:bg-amber-600 group-hover:text-white transition duration-300 shadow-inner">
+                    <i class="fa-solid fa-headphones-simple"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-700">الراديو</span>
+            </a>
+
+            <!-- القصص الدينية -->
+            <a href="stories.html" class="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 text-center flex flex-col items-center group">
+                <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mb-2 group-hover:bg-blue-600 group-hover:text-white transition duration-300 shadow-inner">
+                    <i class="fa-solid fa-scroll"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-700">القصص والعبر</span>
+            </a>
+
+            <!-- الأذكار والأدعية -->
+            <a href="azkar.html" class="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 text-center flex flex-col items-center group">
+                <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl mb-2 group-hover:bg-purple-600 group-hover:text-white transition duration-300 shadow-inner">
+                    <i class="fa-solid fa-hands-praying"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-700">الأذكار والدعاء</span>
+            </a>
+
+            <!-- السيرة النبوية -->
+            <a href="seerah.html" class="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 text-center flex flex-col items-center group">
+                <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-2xl mb-2 group-hover:bg-rose-600 group-hover:text-white transition duration-300 shadow-inner">
+                    <i class="fa-solid fa-shield-heart"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-700">السيرة النبوية</span>
+            </a>
+
+            <!-- دروس ومحاضرات (جديد) -->
+            <a href="lessons.html" class="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 text-center flex flex-col items-center group">
+                <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-2xl mb-2 group-hover:bg-teal-600 group-hover:text-white transition duration-300 shadow-inner">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-700">الدروس</span>
+            </a>
+
+            <!-- مسابقات دينية (جديد) -->
+            <a href="competitions.html" class="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 text-center flex flex-col items-center group">
+                <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl mb-2 group-hover:bg-indigo-600 group-hover:text-white transition duration-300 shadow-inner">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-700">المسابقات</span>
+            </a>
+
+            <!-- قسم المزيد -->
+            <a href="more.html" class="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 text-center flex flex-col items-center group">
+                <div class="w-14 h-14 rounded-2xl bg-slate-100 text-slate-600 flex items-center justify-center text-2xl mb-2 group-hover:bg-slate-700 group-hover:text-white transition duration-300 shadow-inner">
+                    <i class="fa-solid fa-grip"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-700">المزيد</span>
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- الجافاسكريبت الاحترافي (API المواقيت + الراديو + الديالوج) -->
+    <script>
+        // إظهار الديالوج الترحيبي
+        window.addEventListener('DOMContentLoaded', () => {
+            const dontShow = localStorage.getItem('manahil_dont_show');
+            if (!dontShow) {
+                document.getElementById('welcomeModal').classList.remove('hidden');
+            }
+            initPrayerTimes();
+        });
+
+        function closeModal() {
+            const checkbox = document.getElementById('dontShowAgain');
+            if (checkbox.checked) {
+                localStorage.setItem('manahil_dont_show', 'true');
+            }
+            document.getElementById('welcomeModal').classList.add('hidden');
+        }
+
+        // جلب مواقيت الصلاة من AlAdhan API بناءً على موقع المستخدم
+        function initPrayerTimes() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        fetchPrayerTimesByCoords(lat, lng);
+                    },
+                    (error) => {
+                        // الافتراضي في حال رفض الصلاحية أو خطأ الموقع (القاهرة، مصر)
+                        fetchPrayerTimesByCoords(30.0444, 31.2357, "القاهرة، مصر");
+                    }
+                );
+            } else {
+                fetchPrayerTimesByCoords(30.0444, 31.2357, "القاهرة، مصر");
+            }
+        }
+
+        function fetchPrayerTimesByCoords(lat, lng, cityName = "موقعك الحالي") {
+            document.getElementById('locationName').innerText = cityName;
+            const dateStr = new Date().toISOString().split('T')[0];
+            const apiURL = `https://api.aladhan.com/v1/timings/${Math.floor(Date.now() / 1000)}?latitude=${lat}&longitude=${lng}&method=5`;
+
+            fetch(apiURL)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 200) {
+                        renderPrayerData(data.data);
+                    }
+                })
+                .catch(err => {
+                    console.error("فشل جلب مواقيت الصلاة", err);
+                });
+        }
+
+        function renderPrayerData(data) {
+            const timings = data.timings;
+            const hijri = data.date.hijri;
+            const gregorian = data.date.gregorian;
+
+            // عرض التواريخ
+            document.getElementById('hijriDate').innerHTML = `<i class="fa-solid fa-calendar-days text-islamic-gold"></i> ${hijri.day} ${hijri.month.ar} ${hijri.year} هـ`;
+            document.getElementById('gregorianDate').innerText = `${gregorian.weekday.ar}، ${gregorian.date}`;
+
+            const prayers = [
+                { key: 'Fajr', name: 'الفجر', time: timings.Fajr },
+                { key: 'Sunrise', name: 'الشروق', time: timings.Sunrise },
+                { key: 'Dhuhr', name: 'الظهر', time: timings.Dhuhr },
+                { key: 'Asr', name: 'العصر', time: timings.Asr },
+                { key: 'Maghrib', name: 'المغرب', time: timings.Maghrib },
+                { key: 'Isha', name: 'العشاء', time: timings.Isha }
+            ];
+
+            let gridHTML = '';
+            prayers.forEach(p => {
+                gridHTML += `
+                    <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                        <span class="text-[11px] text-slate-500 block">${p.name}</span>
+                        <span class="text-xs font-bold text-islamic-dark mt-1 block">${format12Hour(p.time)}</span>
+                    </div>
+                `;
+            });
+            document.getElementById('prayerTimesGrid').innerHTML = gridHTML;
+            document.getElementById('prayerTimesGrid').className = "grid grid-cols-6 gap-2 text-center";
+
+            // تحديد الصلاة القادمة وبصريات الشمس والقمر
+            updateNextPrayer(timings);
+        }
+
+        function format12Hour(time24) {
+            const [hours, minutes] = time24.split(':');
+            let h = parseInt(hours);
+            const ampm = h >= 12 ? 'م' : 'ص';
+            h = h % 12;
+            h = h ? h : 12;
+            return `${h}:${minutes} ${ampm}`;
+        }
+
+        function updateNextPrayer(timings) {
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+
+            const prayerKeys = [
+                { name: 'الفجر', time: timings.Fajr },
+                { name: 'الشروق', time: timings.Sunrise },
+                { name: 'الظهر', time: timings.Dhuhr },
+                { name: 'العصر', time: timings.Asr },
+                { name: 'المغرب', time: timings.Maghrib },
+                { name: 'العشاء', time: timings.Isha }
+            ];
+
+            let next = prayerKeys[0];
+            for (let p of prayerKeys) {
+                const [ph, pm] = p.time.split(':').map(Number);
+                const pMinutes = ph * 60 + pm;
+                if (currentTime < pMinutes) {
+                    next = p;
+                    break;
+                }
+            }
+
+            document.getElementById('nextPrayerName').innerText = next.name;
+            document.getElementById('nextPrayerTime').innerText = format12Hour(next.time);
+
+            // تغيير أيقونة الشمس والقمر حسب الوقت
+            const hour = now.getHours();
+            const timeIcon = document.getElementById('timeIcon');
+            if (hour >= 6 && hour < 18) {
+                timeIcon.className = "fa-solid fa-sun text-3xl text-islamic-gold";
+            } else {
+                timeIcon.className = "fa-solid fa-moon text-3xl text-amber-300";
+    
